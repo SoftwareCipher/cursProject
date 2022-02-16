@@ -111,7 +111,6 @@ public class SelectDB {
             ResultSet res = statement.executeQuery(query);
             while(res.next()){
                 String n = res.getString(1);
-                System.out.println(n);
             }
             System.out.println(res);
             writeToFile.writeInfo("Таблица " + name + " сущесвует!\n");
