@@ -1,13 +1,19 @@
-package com.company;
+package com.company.dataBase;
+
+import com.company.readFile.Logger;
+import com.company.entities.Department;
+import com.company.entities.Notification;
+import com.company.entities.Package;
+import com.company.entities.Person;
 
 import java.sql.*;
 
 public class SaveDate {
-    Connection con = ConnectDB.getInstance();
-    WriteToFile writeToFile = new WriteToFile();
+    DataBaseConnect dbConnect = new DataBaseConnect();
     SelectDB selectDB = new SelectDB();
 
     public void savePerson(Person person) {
+        Connection con = dbConnect.getConnection();
         selectDB.checkTable("person");
         try {
             String sql =
@@ -17,15 +23,18 @@ public class SaveDate {
             preparedStatement.setString(2, person.getEmail());
             preparedStatement.setInt(3, person.getPhoneNumber());
             preparedStatement.executeUpdate();
-            writeToFile.writeInfo(person.getFio() + " "
+            Logger.writeInfo(person.getFio() + " "
                     + person.getEmail() + " "
                     + person.getPhoneNumber() + '\n');
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            dbConnect.closeConnection(con);
         }
     }
 
     public void saveDepartment(Department department) {
+        Connection con = dbConnect.getConnection();
         if(selectDB.checkDepartment(department.getId())) {
             selectDB.checkTable("department");
             try {
@@ -36,15 +45,18 @@ public class SaveDate {
 
                 preparedStatement.executeUpdate();
 
-                writeToFile.writeInfo(department.getId() + " "
+                Logger.writeInfo(department.getId() + " "
                         + department.getDesc() + '\n');
             } catch (SQLException e) {
                 e.printStackTrace();
+            }finally {
+                dbConnect.closeConnection(con);
             }
         }
     }
 
     public void savePackage(Package pack) {
+        Connection con = dbConnect.getConnection();
         selectDB.checkTable("pack");
         try {
             String sql = "Insert into pack (senderName, senderDepart, recipientDepart, recipientPhoneNumber," +
@@ -59,7 +71,7 @@ public class SaveDate {
             preparedStatement.setTimestamp(7, Timestamp.valueOf(pack.getDateCreation()));
             preparedStatement.setTimestamp(8, Timestamp.valueOf(pack.getDateChange()));
             preparedStatement.executeUpdate();
-            writeToFile.writeInfo(pack.getSenderName() + " "
+            Logger.writeInfo(pack.getSenderName() + " "
                     + pack.getSenderDepart() + " "
                     + pack.getRecipientDepart() + " "
                     + pack.getRecipientPhoneNumber() + " "
@@ -69,10 +81,13 @@ public class SaveDate {
                     + Timestamp.valueOf(pack.getDateChange()) + '\n');
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            dbConnect.closeConnection(con);
         }
     }
 
     public void saveNotification(Notification notification) {
+        Connection con = dbConnect.getConnection();
         selectDB.checkTable("notification");
         try {
             String sql = "Insert into notification (notification, status) Values (?, ?)";
@@ -80,10 +95,12 @@ public class SaveDate {
             preparedStatement.setString(1, notification.getText());
             preparedStatement.setString(2, notification.getStatus());
             preparedStatement.executeUpdate();
-            writeToFile.writeInfo(notification.getText() + " "
+            Logger.writeInfo(notification.getText() + " "
                     + notification.getStatus() + '\n');
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            dbConnect.closeConnection(con);
         }
     }
 }

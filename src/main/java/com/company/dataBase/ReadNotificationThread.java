@@ -1,4 +1,6 @@
-package com.company;
+package com.company.dataBase;
+
+import com.company.readFile.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,18 +8,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ReadNotificationThread extends Thread {
-    Connection con = ConnectDB.getInstance();
+    DataBaseConnect dbConnect = new DataBaseConnect();
     SelectDB selectDB = new SelectDB();
     int numberColum = selectDB.columNumberNotification();
-    WriteToFile writeToFile = new WriteToFile();
     PreparedStatement preparedStatement;
     String notification = "";
     String status = "";
 
     public void run() {
+        Connection con = dbConnect.getConnection();
         try {
             for (int i = 1; i <= numberColum; i++) {
-                writeToFile.writeInfo(("Строка таблицы: " + i + '\n'));
+                Logger.writeInfo(("Строка таблицы: " + i + '\n'));
                 preparedStatement =
                         con.prepareStatement("SELECT * FROM notification where id = ?");
                 preparedStatement.setInt(1, i);
@@ -32,21 +34,24 @@ public class ReadNotificationThread extends Thread {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally {
+            dbConnect.closeConnection(con);
         }
     }
 
     private void ifFalseSentStatus() {
         if (!status.equals("sent")) {
-            writeToFile.writeInfo(("Уведомление: " + notification + ", статус: " + status + '\n'));
+            Logger.writeInfo(("Уведомление: " + notification + ", статус: " + status + '\n'));
         }
     }
     private void ifTrueSentStatus() {
         if (status.equals("sent")) {
-            writeToFile.writeInfo(("Уведомление: " + notification + ", статус: " + status + '\n'));
+            Logger.writeInfo(("Уведомление: " + notification + ", статус: " + status + '\n'));
         }
     }
 
     private void ifNewStatus(int id) {
+        Connection con = dbConnect.getConnection();
         try {
             if (status.equals("new")) {
                 preparedStatement =
@@ -56,7 +61,8 @@ public class ReadNotificationThread extends Thread {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally {
+            dbConnect.closeConnection(con);
         }
     }
-
 }

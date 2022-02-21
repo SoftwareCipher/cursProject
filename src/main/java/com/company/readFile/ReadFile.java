@@ -1,4 +1,10 @@
-package com.company;
+package com.company.readFile;
+
+import com.company.dataBase.SaveDate;
+import com.company.entities.Department;
+import com.company.entities.Notification;
+import com.company.entities.Package;
+import com.company.entities.Person;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +14,6 @@ import java.util.List;
 
 public class ReadFile {
     private Path path;
-    WriteToFile writeToFile = new WriteToFile();
 
     public ReadFile(Path path) {
         this.path = path;
@@ -59,7 +64,7 @@ public class ReadFile {
                 }
                 break;
             } catch (IOException e) {
-                writeToFile.writeInfo("Файл отсутствует!\n");
+                Logger.writeInfo("Файл отсутствует!\n");
             }
         }
         return list;

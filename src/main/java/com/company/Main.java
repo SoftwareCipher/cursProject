@@ -1,5 +1,12 @@
 package com.company;
 
+import com.company.businessLogic.Logics;
+import com.company.dataBase.DataBaseConnect;
+import com.company.dataBase.ReadNotificationThread;
+import com.company.dataBase.ReadTables;
+import com.company.readFile.Logger;
+import com.company.readFile.ReadFile;
+
 import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.Timer;
@@ -19,13 +26,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        WriteToFile writeToFile = new WriteToFile();
-        writeToFile.writeInfo(String.valueOf(LocalTime.now()) + '\n');
+        DataBaseConnect dbConnect = new DataBaseConnect();
+        dbConnect.createPool();
+        Logger.writeInfo(String.valueOf(LocalTime.now()) + '\n');
         Path path = Path.of(args[0]);
         ReadFile readFile = new ReadFile(path);
         readFile.readFile();
-        writeToFile.writeInfo(String.valueOf(LocalTime.now()) + '\n');
-        writeToFile.writeInfo("Logics начал выполнение\n");
+        Logger.writeInfo(String.valueOf(LocalTime.now()) + '\n');
+        Logger.writeInfo("Logics начал выполнение\n");
         treadReadNotification();
         Timer timer = new Timer();
         timer.schedule(new Logics(), 100, 1000);
@@ -35,7 +43,7 @@ public class Main {
             e.printStackTrace();
         }
         timer.cancel();
-        writeToFile.writeInfo("Logics прекращена\n");
+        Logger.writeInfo("Logics прекращена\n");
         treadReadNotification();
         ReadTables readTables = new ReadTables();
         readTables.readT();

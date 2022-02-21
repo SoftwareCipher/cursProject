@@ -1,4 +1,4 @@
-package com.company;
+package com.company.entities;
 
 public class Person {
     private int phoneNumber;

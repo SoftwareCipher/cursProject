@@ -1,11 +1,11 @@
-package com.company;
+package com.company.readFile;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteToFile {
+public class Logger {
 
-    public void writeInfo(String text) {
+    public static void writeInfo(String text) {
         try (FileWriter writer = new FileWriter("inform.txt", true)) {
             writer.write(text);
             writer.flush();
@@ -14,7 +14,7 @@ public class WriteToFile {
         }
     }
 
-    public void writeInfoTable(String text) {
+    public static void writeInfoTable(String text) {
         try (FileWriter writer = new FileWriter("infoFromTables.txt", true)) {
             writer.write(text);
             writer.flush();
