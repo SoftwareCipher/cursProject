@@ -28,13 +28,16 @@ public class Main {
     public static void main(String[] args) {
         DataBaseConnect dbConnect = new DataBaseConnect();
         dbConnect.createPool();
+
         Logger.writeInfo(String.valueOf(LocalTime.now()) + '\n');
         Path path = Path.of(args[0]);
         ReadFile readFile = new ReadFile(path);
         readFile.readFile();
+
         Logger.writeInfo(String.valueOf(LocalTime.now()) + '\n');
         Logger.writeInfo("Logics начал выполнение\n");
         treadReadNotification();
+
         Timer timer = new Timer();
         timer.schedule(new Logics(), 100, 1000);
         try {
@@ -43,8 +46,10 @@ public class Main {
             e.printStackTrace();
         }
         timer.cancel();
+
         Logger.writeInfo("Logics прекращена\n");
         treadReadNotification();
+
         ReadTables readTables = new ReadTables();
         readTables.readT();
     }
