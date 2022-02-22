@@ -1,6 +1,14 @@
 package com.company.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@AllArgsConstructor
 
 public class Package {
     private long id;
@@ -12,49 +20,4 @@ public class Package {
     private String status;
     private LocalDateTime dateCreation;
     private LocalDateTime dateChange;
-
-    public Package(long id, String senderName, String senderDepart, String recipientDepart, int recipientPhoneNumber,
-                   String recipientName, String status, LocalDateTime dateCreation, LocalDateTime dateChange) {
-        this.id = id;
-        this.senderName = senderName;
-        this.senderDepart = senderDepart;
-        this.recipientDepart = recipientDepart;
-        this.recipientPhoneNumber = recipientPhoneNumber;
-        this.recipientName = recipientName;
-        this.status = status;
-        this.dateCreation = dateCreation;
-        this.dateChange = dateChange;
-    }
-
-    public String getSenderName() {
-        return senderName;
-    }
-
-    public String getSenderDepart() {
-        return senderDepart;
-    }
-
-    public String getRecipientDepart() {
-        return recipientDepart;
-    }
-
-    public int getRecipientPhoneNumber() {
-        return recipientPhoneNumber;
-    }
-
-    public String getRecipientName() {
-        return recipientName;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public LocalDateTime getDateCreation() {
-        return dateCreation;
-    }
-
-    public LocalDateTime getDateChange() {
-        return dateChange;
-    }
 }
