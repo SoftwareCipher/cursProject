@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 public class ReadTables {
     DataBaseConnect dbConnect = new DataBaseConnect();
-    Connection con = dbConnect.getConnection();
     PreparedStatement preparedStatement;
 
     public void readT() {
@@ -47,7 +46,7 @@ public class ReadTables {
         Connection con = dbConnect.getConnection();
         Logger.writeInfoTable("Таблица notification:\n");
         try {
-            preparedStatement = con.prepareStatement("SELECT * FROM notification");
+            preparedStatement = con.prepareStatement("SELECT * FROM notification order by id asc");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Logger.writeInfoTable(resultSet.getString("id"));
@@ -87,7 +86,7 @@ public class ReadTables {
         Connection con = dbConnect.getConnection();
         Logger.writeInfoTable("Таблица pack:\n");
         try {
-            preparedStatement = con.prepareStatement("SELECT * FROM pack");
+            preparedStatement = con.prepareStatement("SELECT * FROM pack order by id asc");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Logger.writeInfoTable(resultSet.getString("id"));

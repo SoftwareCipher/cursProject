@@ -40,25 +40,22 @@ public class ReadFile {
                                 saveDate.saveDepartment(department);
                             }
                         } else if (arr[i].equals("PACKAGE")) {
-                            if(arr.length == 8){
+                            if(arr.length == 7){
                                 Package packege = new Package(
-                                        Long.parseLong(arr[i + 1]),
+                                        arr[i + 1],
                                         arr[i + 2],
                                         arr[i + 3],
-                                        arr[i + 4],
-                                        Integer.parseInt(arr[i + 5]),
+                                        Integer.parseInt(arr[i + 4]),
+                                        arr[i + 5],
                                         arr[i + 6],
-                                        arr[i + 7],
                                         LocalDateTime.now(),
                                         LocalDateTime.now()
                                 );
                                 saveDate.savePackage(packege);
-                            }
-                        } else if(arr[i].equals("NOTIFICATION")){
-                            if(arr.length == 3){
-                                Notification notification = new Notification(arr[i + 1], arr[i + 2]);
+                                Notification notification = new Notification("Ждет", "new");
                                 saveDate.saveNotification(notification);
                             }
+
                         }
                     }
                 }

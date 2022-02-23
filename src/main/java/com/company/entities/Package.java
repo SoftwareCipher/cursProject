@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 
 public class Package {
-    private long id;
     private String senderName;
     private String senderDepart;
     private String recipientDepart;
