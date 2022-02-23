@@ -19,7 +19,7 @@ public class ReadNotificationThread extends Thread {
         Connection con = dbConnect.getConnection();
         try {
             for (int i = 1; i <= numberColum; i++) {
-                Logger.writeInfo(("Строка таблицы: " + i + '\n'));
+                Logger.writeInfo(("Номер заказа: " + i + '\n'));
                 preparedStatement =
                         con.prepareStatement("SELECT * FROM notification where id = ?");
                 preparedStatement.setInt(1, i);
