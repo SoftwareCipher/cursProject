@@ -1,6 +1,6 @@
 package com.company.dataBase;
 
-import com.company.readFile.Logger;
+import com.company.readFile.WriteFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ReadNotificationThread extends Thread {
-    DataBaseConnect dbConnect = new DataBaseConnect();
+    DBConnect dbConnect = new DBConnect();
     SelectDB selectDB = new SelectDB();
     int numberColum = selectDB.columNumberNotification();
     PreparedStatement preparedStatement;
@@ -19,7 +19,7 @@ public class ReadNotificationThread extends Thread {
         Connection con = dbConnect.getConnection();
         try {
             for (int i = 1; i <= numberColum; i++) {
-                Logger.writeInfo(("Номер заказа: " + i + '\n'));
+                WriteFile.writeInfo(("Order number: " + i + '\n'));
                 preparedStatement =
                         con.prepareStatement("SELECT * FROM notification where id = ?");
                 preparedStatement.setInt(1, i);
@@ -41,12 +41,12 @@ public class ReadNotificationThread extends Thread {
 
     private void ifFalseSentStatus() {
         if (!status.equals("sent")) {
-            Logger.writeInfo(("Уведомление: " + notification + ", статус: " + status + '\n'));
+            WriteFile.writeInfo(("Notification : " + notification + ", status: " + status + '\n'));
         }
     }
     private void ifTrueSentStatus() {
         if (status.equals("sent")) {
-            Logger.writeInfo(("Уведомление: " + notification + ", статус: " + status + '\n'));
+            WriteFile.writeInfo(("Notification: " + notification + ", status: " + status + '\n'));
         }
     }
 

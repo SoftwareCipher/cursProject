@@ -1,10 +1,10 @@
 package com.company;
 
 import com.company.businessLogic.Logics;
-import com.company.dataBase.DataBaseConnect;
+import com.company.dataBase.DBConnect;
 import com.company.dataBase.ReadNotificationThread;
 import com.company.dataBase.ReadTables;
-import com.company.readFile.Logger;
+import com.company.readFile.WriteFile;
 import com.company.readFile.ReadFile;
 
 import java.nio.file.Path;
@@ -26,16 +26,17 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        DataBaseConnect dbConnect = new DataBaseConnect();
+        DBConnect dbConnect = new DBConnect();
         dbConnect.createPool();
 
-        Logger.writeInfo(String.valueOf(LocalTime.now()) + '\n');
+        WriteFile.writeInfo(String.valueOf(LocalTime.now()) + '\n');
         Path path = Path.of(args[0]);
+
         ReadFile readFile = new ReadFile(path);
         readFile.readFile();
 
-        Logger.writeInfo(String.valueOf(LocalTime.now()) + '\n');
-        Logger.writeInfo("Logics начал выполнение\n");
+        WriteFile.writeInfo(String.valueOf(LocalTime.now()) + '\n');
+        WriteFile.writeInfo("Logics start\n");
         treadReadNotification();
 
         Timer timer = new Timer();
@@ -47,10 +48,10 @@ public class Main {
         }
         timer.cancel();
 
-        Logger.writeInfo("Logics прекращена\n");
+        WriteFile.writeInfo("Logics прекращена\n");
         treadReadNotification();
 
         ReadTables readTables = new ReadTables();
-        readTables.readT();
+        readTables.readAllTables();
     }
 }

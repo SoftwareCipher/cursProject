@@ -1,6 +1,6 @@
 package com.company.dataBase;
 
-import com.company.readFile.Logger;
+import com.company.readFile.WriteFile;
 import com.company.entities.Department;
 import com.company.entities.Notification;
 import com.company.entities.Package;
@@ -9,12 +9,12 @@ import com.company.entities.Person;
 import java.sql.*;
 
 public class SaveDate {
-    DataBaseConnect dbConnect = new DataBaseConnect();
-    SelectDB selectDB = new SelectDB();
+    DBConnect dbConnect = new DBConnect();
+    CheckTables checkTables = new CheckTables();
 
     public void savePerson(Person person) {
         Connection con = dbConnect.getConnection();
-        selectDB.checkTable("person");
+        checkTables.checkTable("person");
         try {
             String sql =
                     "Insert into Person (fio, email, phone) Values (?, ?, ?)";
@@ -23,7 +23,7 @@ public class SaveDate {
             preparedStatement.setString(2, person.getEmail());
             preparedStatement.setInt(3, person.getPhoneNumber());
             preparedStatement.executeUpdate();
-            Logger.writeInfo(person.getFio() + " "
+            WriteFile.writeInfo(person.getFio() + " "
                     + person.getEmail() + " "
                     + person.getPhoneNumber() + '\n');
         } catch (SQLException e) {
@@ -35,8 +35,8 @@ public class SaveDate {
 
     public void saveDepartment(Department department) {
         Connection con = dbConnect.getConnection();
-        if(selectDB.checkDepartment(department.getId())) {
-            selectDB.checkTable("department");
+        if(checkTables.checkDepartment(department.getId())) {
+            checkTables.checkTable("department");
             try {
                 String sql = "Insert into department (id, description) Values (?, ?)";
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class SaveDate {
 
                 preparedStatement.executeUpdate();
 
-                Logger.writeInfo(department.getId() + " "
+                WriteFile.writeInfo(department.getId() + " "
                         + department.getDesc() + '\n');
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -57,7 +57,7 @@ public class SaveDate {
 
     public void savePackage(Package pack) {
         Connection con = dbConnect.getConnection();
-        selectDB.checkTable("pack");
+        checkTables.checkTable("pack");
         try {
             String sql = "Insert into pack (senderName, senderDepart, recipientDepart, recipientPhoneNumber," +
                     "recipientName, status, dateCreation, dateChange) Values (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -71,7 +71,7 @@ public class SaveDate {
             preparedStatement.setTimestamp(7, Timestamp.valueOf(pack.getDateCreation()));
             preparedStatement.setTimestamp(8, Timestamp.valueOf(pack.getDateChange()));
             preparedStatement.executeUpdate();
-            Logger.writeInfo(pack.getSenderName() + " "
+            WriteFile.writeInfo(pack.getSenderName() + " "
                     + pack.getSenderDepart() + " "
                     + pack.getRecipientDepart() + " "
                     + pack.getRecipientPhoneNumber() + " "
@@ -88,14 +88,14 @@ public class SaveDate {
 
     public void saveNotification(Notification notification) {
         Connection con = dbConnect.getConnection();
-        selectDB.checkTable("notification");
+        checkTables.checkTable("notification");
         try {
             String sql = "Insert into notification (notification, status) Values (?, ?)";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, notification.getText());
             preparedStatement.setString(2, notification.getStatus());
             preparedStatement.executeUpdate();
-            Logger.writeInfo(notification.getText() + " "
+            WriteFile.writeInfo(notification.getText() + " "
                     + notification.getStatus() + '\n');
         } catch (SQLException e) {
             e.printStackTrace();

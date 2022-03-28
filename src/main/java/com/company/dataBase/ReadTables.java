@@ -1,6 +1,6 @@
 package com.company.dataBase;
 
-import com.company.readFile.Logger;
+import com.company.readFile.WriteFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,10 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ReadTables {
-    DataBaseConnect dbConnect = new DataBaseConnect();
+    DBConnect dbConnect = new DBConnect();
     PreparedStatement preparedStatement;
 
-    public void readT() {
+    public void readAllTables() {
         readTablePerson();
         readTableNotification();
         readTablePack();
@@ -20,19 +20,19 @@ public class ReadTables {
 
     private void readTablePerson() {
         Connection con = dbConnect.getConnection();
-        Logger.writeInfoTable("Таблица person:\n");
+        WriteFile.writeInfoTable("Table person:\n");
         try {
             preparedStatement = con.prepareStatement("SELECT * FROM person");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Logger.writeInfoTable(resultSet.getString("id"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("fio"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("email"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("phone"));
-                Logger.writeInfoTable("\n");
+                WriteFile.writeInfoTable(resultSet.getString("id"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("fio"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("email"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("phone"));
+                WriteFile.writeInfoTable("\n");
 
             }
         } catch (SQLException e) {
@@ -44,17 +44,17 @@ public class ReadTables {
 
     private void readTableNotification() {
         Connection con = dbConnect.getConnection();
-        Logger.writeInfoTable("Таблица notification:\n");
+        WriteFile.writeInfoTable("Table notification:\n");
         try {
             preparedStatement = con.prepareStatement("SELECT * FROM notification order by id asc");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Logger.writeInfoTable(resultSet.getString("id"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("notification"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("status"));
-                Logger.writeInfoTable("\n");
+                WriteFile.writeInfoTable(resultSet.getString("id"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("notification"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("status"));
+                WriteFile.writeInfoTable("\n");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,15 +65,15 @@ public class ReadTables {
 
     private void readTableDepartment() {
         Connection con = dbConnect.getConnection();
-        Logger.writeInfoTable("Таблица department:\n");
+        WriteFile.writeInfoTable("Table department:\n");
         try {
             preparedStatement = con.prepareStatement("SELECT * FROM department");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Logger.writeInfoTable(resultSet.getString("id"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("description"));
-                Logger.writeInfoTable("\n");
+                WriteFile.writeInfoTable(resultSet.getString("id"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("description"));
+                WriteFile.writeInfoTable("\n");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,29 +84,29 @@ public class ReadTables {
 
     private void readTablePack() {
         Connection con = dbConnect.getConnection();
-        Logger.writeInfoTable("Таблица pack:\n");
+        WriteFile.writeInfoTable("Table pack:\n");
         try {
             preparedStatement = con.prepareStatement("SELECT * FROM pack order by id asc");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Logger.writeInfoTable(resultSet.getString("id"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("senderName"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("senderDepart"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("recipientDepart"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("recipientPhoneNumber"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("recipientName"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("status"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("dateCreation"));
-                Logger.writeInfoTable(" | ");
-                Logger.writeInfoTable(resultSet.getString("dateChange"));
-                Logger.writeInfoTable("\n");
+                WriteFile.writeInfoTable(resultSet.getString("id"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("senderName"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("senderDepart"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("recipientDepart"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("recipientPhoneNumber"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("recipientName"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("status"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("dateCreation"));
+                WriteFile.writeInfoTable(" | ");
+                WriteFile.writeInfoTable(resultSet.getString("dateChange"));
+                WriteFile.writeInfoTable("\n");
             }
         } catch (SQLException e) {
             e.printStackTrace();

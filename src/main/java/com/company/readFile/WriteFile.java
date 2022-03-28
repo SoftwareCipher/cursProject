@@ -3,14 +3,14 @@ package com.company.readFile;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Logger {
+public class WriteFile {
 
     public static void writeInfo(String text) {
         try (FileWriter writer = new FileWriter("inform.txt", true)) {
             writer.write(text);
             writer.flush();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("No such file - inform.txt");
         }
     }
 
@@ -19,7 +19,7 @@ public class Logger {
             writer.write(text);
             writer.flush();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("No such file - infoFromTables.txt");
         }
     }
 }

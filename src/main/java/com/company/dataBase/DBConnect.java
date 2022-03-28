@@ -1,6 +1,6 @@
 package com.company.dataBase;
 
-import com.company.readFile.Logger;
+import com.company.readFile.WriteFile;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class DataBaseConnect {
+public class DBConnect {
     private static BlockingQueue<Connection> pool = new ArrayBlockingQueue<>(10, true);
     private static final String driver = "org.postgresql.Driver";
     private static final String url = "jdbc:postgresql://localhost:5432/postgres";
@@ -18,11 +18,15 @@ public class DataBaseConnect {
     public void createPool() {
         try {
             Class.forName(driver);
-            Logger.writeInfo(("------ Драйвер подключен! ------\n"));
+            WriteFile.writeInfo(("------ Driver connected ! ------\n"));
         } catch (ClassNotFoundException e) {
-            Logger.writeInfo(("------ PostgreSQL JDBC Driver не найден! ------\n"));
+            WriteFile.writeInfo(("------ PostgreSQL JDBC Driver not found! ------\n"));
             e.printStackTrace();
         }
+        addConnection();
+    }
+
+    private void addConnection() {
         for (int i = 0; i < 10; i++) {
             try {
                 pool.add(DriverManager.getConnection(url, user, password));

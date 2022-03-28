@@ -1,9 +1,9 @@
 USER Berlizov_Ivan_Ivanovich ivan1234567@gmail.com 0688552221
 USER Belov_Miron_Borisovich belovMiron@gmail.com 0976542338
-DEPARTMENT 1 Отделение№1
-DEPARTMENT 2 Отделение№2
-DEPARTMENT 3 Отделение№3
-DEPARTMENT 4 Отделение№4
+DEPARTMENT 1 Department№1
+DEPARTMENT 2 Department№2
+DEPARTMENT 3 Department№3
+DEPARTMENT 4 Department№4
 PACKAGE Berlizov_Ivan_Ivanovich Отделение№1 Отделение№3 0999553331 Dudnikova_Natalia_Ivanovna New
 PACKAGE Litvin_Vladislav_Ivanovich Отделение№3 Отделение№2 0678662345 Dudnikova_Natalia_Ivanovna New
 PACKAGE Belov_Miron_Borisovich Отделение№3 0678662345 Dudnikova_Natalia_Ivanovna New
