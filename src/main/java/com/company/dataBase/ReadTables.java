@@ -33,7 +33,6 @@ public class ReadTables {
                 WriteFile.writeInfoTable(" | ");
                 WriteFile.writeInfoTable(resultSet.getString("phone"));
                 WriteFile.writeInfoTable("\n");
-
             }
         } catch (SQLException e) {
             e.printStackTrace();

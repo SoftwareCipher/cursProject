@@ -46,7 +46,7 @@ public class ReadFile {
         return list;
     }
 
-    private void readPerson(String[] arr, int i){
+    public void readPerson(String[] arr, int i){
         if(arr.length == 4){
             Person person = new Person(
                     arr[i + 1],
@@ -56,7 +56,7 @@ public class ReadFile {
         }
     }
 
-    private void readDepartment(String[] arr, int i){
+    public void readDepartment(String[] arr, int i){
         if(arr.length == 3){
             Department department = new Department(
                     Integer.parseInt(arr[i + 1]), arr[i + 2]);
@@ -64,7 +64,7 @@ public class ReadFile {
         }
     }
 
-    private void readPackage(String[] arr, int i){
+    public void readPackage(String[] arr, int i){
         if(arr.length == 7){
             Package packege = new Package(
                     arr[i + 1],
