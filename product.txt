@@ -6,4 +6,3 @@ DEPARTMENT 3 Department№3
 DEPARTMENT 4 Department№4
 PACKAGE Berlizov_Ivan_Ivanovich department№1 department№3 0999553331 Dudnikova_Natalia_Ivanovna New
 PACKAGE Litvin_Vladislav_Ivanovich department№3 department№2 0678662345 Dudnikova_Natalia_Ivanovna New
-PACKAGE Belov_Miron_Borisovich Отделение№3 0678662345 Dudnikova_Natalia_Ivanovna New
